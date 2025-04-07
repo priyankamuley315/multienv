@@ -1,1 +1,22 @@
 name: Deploy to Production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - name: Build app
+        run: echo "Building the app"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://your-app.example.com
+    steps:
+      - name: Deploy to production
+        run: echo "Deploying the app to production"
